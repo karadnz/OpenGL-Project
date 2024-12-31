@@ -1,0 +1,13 @@
+{
+    "ProgramName":"TextureShader",
+    "VertexShader":"vertex.glsl",
+    "FragmentShader":"fragment.glsl",
+    "Uniforms":[
+        {
+            "Name":"uWorldTransform",
+            "Type":"mat4"
+        }
+    ]
+    
+    
+}

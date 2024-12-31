@@ -1,0 +1,18 @@
+{
+    "ProgramName":"LightTextureShader",
+    "VertexShader":"vertex.glsl",
+    "FragmentShader":"fragment.glsl",
+    "Uniforms":[
+        {
+            "Name":"uWorldTransform",
+            "Type":"mat4"
+        },
+        {
+            "Name":"uInverseRotation",
+            "Type":"mat4"
+        }
+
+    ]
+    
+    
+}
