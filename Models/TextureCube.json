@@ -1,0 +1,9 @@
+{
+    "ModelName":"TextureCube",
+    "TextureName":"container3.jpg",
+    "ShaderProgramName":"TextureShader",
+    "ShapeType":2,
+    "Scale":[
+        1.0,1.0,1.0
+    ]
+}

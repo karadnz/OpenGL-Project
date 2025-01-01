@@ -17,6 +17,8 @@
 using namespace std;
 
 void printMatrix(const glm::mat4& mtx);
+void testModels(std::vector<std::string> &modelFiles,  graf::Scene &scene);
+
 
 
 int main(int arc, char** argv)
@@ -26,18 +28,14 @@ int main(int arc, char** argv)
 
     graf::Scene scene;
 
-    // Create models for walls and ground
-    std::vector<std::string> modelFiles = {
-        "LightTextureCube.json", // Left wall
-        "LightTextureCube.json", // Right wall
-        "LightTextureCube.json",  // Ground
-        "LightTextureSquare.json"
+    // Create models
+    std::vector<std::string> modelFiles =
+    {
+        "LightTextureCube.json",        
+        "TextureSquare.json"            
     };
 
-        graf::Model* model = graf::Model::loadModelFromFile(modelFiles[3]);
-        model->getTransform()->setPosition(glm::vec3(-4.0f, 1.0f, 1.0f));
-        //model->getTransform()->setScale(scales[i]);
-        scene.addModel(model);
+    testModels(modelFiles, scene);
 
     // Define positions for walls and ground
     std::vector<glm::vec3> positions = {
@@ -53,19 +51,13 @@ int main(int arc, char** argv)
         glm::vec3(10.0f, 0.1f, 10.0f)   // Ground
     };
 
-
-
     // Create and configure models
-    for (size_t i = 0; i < modelFiles.size() - 1; ++i)
+    for (size_t i = 0; i < 3; ++i)
     {
-        graf::Model* model = graf::Model::loadModelFromFile(modelFiles[i]);
+        graf::Model* model = graf::Model::loadModelFromFile(modelFiles[0]);
         model->getTransform()->setPosition(positions[i]);
-        //model->getTransform()->setScale(scales[i]);
-
-        //model->getTextureRepeat() = glm::vec2(2.0f, 2.0f); // Will repeat texture 2 times in both directions
+        model->getTransform()->setScale(scales[i]);
         scene.addModel(model);
-
-        //cout << "repeat " << model->getTextureRepeat() << endl;
     }
 
     double oldMouseX = -1.0f;
@@ -74,7 +66,7 @@ int main(int arc, char** argv)
     double dy = 0.0f;
 
     graf::Camera* camera = scene.getActiveCamera();
-    camera->getTransform()->setPosition(glm::vec3(0.0f, 2.0f, 10.0f)); // Position camera to view the scene
+    camera->getTransform()->setPosition(glm::vec3(0.0f, 2.0f, -10.0f)); // Position camera to view the scene
 
     glwindow.setKeyboardFunction([&](int key, int scancode, int action)
     {
@@ -116,6 +108,9 @@ int main(int arc, char** argv)
 
         oldMouseX= xpos;
         oldMouseY=ypos;
+
+        //cout << "x: " << oldMouseX << "| y: " << oldMouseY << "\n";
+        //camera->getProjMatrix
       
     });
 
@@ -133,6 +128,18 @@ int main(int arc, char** argv)
     exit(EXIT_SUCCESS);
 }
 
+
+void testModels(std::vector<std::string> &modelFiles,  graf::Scene &scene)
+{
+    for (size_t i = 0; i < modelFiles.size(); ++i)
+    {
+        graf::Model* model = graf::Model::loadModelFromFile(modelFiles[i]);
+        model->getTransform()->setPosition(glm::vec3(-2.0f * i, 1.0f, 1.0f));
+        scene.addModel(model);
+        //"LightTextureSquare.json",      
+        //"TextureCube.json", 
+    }
+}
 
 void printMatrix(const glm::mat4& mtx)
 {

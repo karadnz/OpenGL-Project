@@ -1,7 +1,7 @@
 {
     "ModelName":"TextureSquare",
     "TextureName":"container3.jpg",
-    "ShaderProgramName":"LightTextureShader",
+    "ShaderProgramName":"TextureShader",
     "ShapeType":1,
     "Scale":[
         1.0,1.0,1.0
