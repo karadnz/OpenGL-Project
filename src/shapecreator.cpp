@@ -34,9 +34,11 @@ namespace graf
 
         case ShapeTypes::Pyramid:
             vao = m_Instance->createPyramid();
+            break;
 
         case ShapeTypes::Frustum:
-            vao = m_Instance->createFrustum();                
+            vao = m_Instance->createFrustum();
+            break;               
         default:
             break;
         }
