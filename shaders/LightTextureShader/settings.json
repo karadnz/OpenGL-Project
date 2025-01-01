@@ -10,9 +10,10 @@
         {
             "Name":"uInverseRotation",
             "Type":"mat4"
+        },
+        {
+            "Name":"uLightDirection",
+            "Type":"vec3"
         }
-
     ]
-    
-    
 }
