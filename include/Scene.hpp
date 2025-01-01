@@ -9,6 +9,7 @@ namespace graf
     {
     public:
         Scene();
+        ~Scene();
         void addModel(Model* model);
         void addModel(const string& fileName);
         void removeModel(Model* model);
@@ -23,6 +24,9 @@ namespace graf
         ModelList   m_modelList;
         int currentSelectedModel = 0;  // Track currently selected model
         int currentSelectedCamera = 0; // Track currently selected camera
+        Model* m_selectionCube;  // Add this line: Model for selection indicator
+        int viewportCameraIndex = 0; // Track camera used for viewport
+        Model* m_cameraIndicator;  // Add this line: Model for camera position indicators
     };
 }
 #endif

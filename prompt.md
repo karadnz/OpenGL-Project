@@ -3,8 +3,9 @@
 - view port - diger kamerayi gosterecek
 - save scene -> herseyi kaydet
 - camera oldugu yerde cizgileri olan bir piramit, bakilan yere donecek
-- view matris aktif kameradan cekilecek
 
+- check rotation
+- check textures/shapes
 
 ## Control
 - model selection

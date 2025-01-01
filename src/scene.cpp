@@ -1,4 +1,4 @@
-#include "scene.hpp"
+#include "Scene.hpp"
 #include "camera.hpp"
 #include "shadermanager.hpp"
 #include "texturemanager.hpp"
@@ -7,6 +7,9 @@
 #include<nlohmann/json.hpp>
 #include "shapecreator.hpp"
 #include "transform.hpp"
+#include<imgui/imgui.h>
+#include<glad/glad.h>  // Add this line to get OpenGL function declarations
+
 namespace graf
 {
     void Scene::addModel(const string& fileName)
@@ -20,6 +23,19 @@ namespace graf
         
         m_activeCamera = new Camera();
         m_cameraList.push_back(m_activeCamera);  // Add default camera to list
+        
+        // Create selection indicator cube
+        m_selectionCube = Model::createModel("indicator.jpg", "LightTextureShader", ShapeTypes::Cube);
+        m_selectionCube->getTransform()->setScale(glm::vec3(0.3f)); // Make it small
+
+        // Create camera indicator cube (similar to selection cube but different texture/color)
+        m_cameraIndicator = Model::createModel("camera_indicator.jpg", "LightTextureShader", ShapeTypes::Cube);
+        m_cameraIndicator->getTransform()->setScale(glm::vec3(0.2f)); // Make it smaller than selection cube
+    }
+    Scene::~Scene() {
+        delete m_selectionCube;
+        delete m_cameraIndicator;
+        // ...existing cleanup code...
     }
     void Scene::addModel(Model* model)
     {
@@ -46,13 +62,66 @@ namespace graf
     }
     void Scene::render()
     {
+        // Set viewport to main window size
+        glViewport(0, 0, 1400, 1400);
         
+        // Draw camera indicators first (so they're behind everything)
+        for(auto cam : m_cameraList) {
+            if(cam != m_activeCamera) { // Don't show indicator for active camera
+                m_cameraIndicator->getTransform()->setPosition(cam->getTransform()->getPosition());
+                m_cameraIndicator->draw(m_activeCamera->getProjMatrix() * m_activeCamera->getViewMatrix()); // Fixed this line
+            }
+        }
+
+        // Main viewport render
         for(auto next:m_modelList)
         {
             next->draw(m_activeCamera->getProjMatrix()*m_activeCamera->getViewMatrix());
+            
+            // If this is selected model, draw selection cube above it
+            if (next == m_modelList[currentSelectedModel]) {
+                // Get position of current model and offset it upwards
+                glm::vec3 pos = next->getTransform()->getPosition();
+                pos.y += next->getTransform()->getScale().y + 0.5f; // Position above model
+                
+                // Update selection cube position
+                m_selectionCube->getTransform()->setPosition(pos);
+                
+                // Slowly rotate the selection cube
+                static float rotation = 0.0f;
+                rotation += 0.3f;
+                m_selectionCube->getTransform()->setEuler(glm::vec3(0.0f, rotation, 0.0f));
+                
+                // Draw selection cube
+                m_selectionCube->draw(m_activeCamera->getProjMatrix()*m_activeCamera->getViewMatrix());
+            }
         }
-         renderGui()   ; 
-       
+
+        // Small viewport in top-right corner
+        if (m_cameraList.size() > viewportCameraIndex) {
+            // Set viewport to top-right corner, 1/4 of the window size
+            glViewport(900, 900, 500, 500);
+            
+            // Clear depth buffer for new viewport
+            glClear(GL_DEPTH_BUFFER_BIT);
+            
+            Camera* viewportCam = m_cameraList[viewportCameraIndex];
+
+            // Draw camera indicators in viewport
+            for(auto cam : m_cameraList) {
+                if(cam != viewportCam) { // Don't show indicator for viewport camera
+                    m_cameraIndicator->getTransform()->setPosition(cam->getTransform()->getPosition());
+                    m_cameraIndicator->draw(viewportCam->getProjMatrix() * viewportCam->getViewMatrix());
+                }
+            }
+            
+            // Render rest of scene from viewport camera perspective
+            for(auto next:m_modelList) {
+                next->draw(viewportCam->getProjMatrix() * viewportCam->getViewMatrix());
+            }
+        }
+        
+        renderGui();
     }
     void Scene::saveScene(const string& filename) {
         nlohmann::json j;
@@ -105,6 +174,7 @@ namespace graf
         auto activeCameraIt = std::find(m_cameraList.begin(), m_cameraList.end(), m_activeCamera);
         j["activeCameraIndex"] = activeCameraIt - m_cameraList.begin();
         j["selectedCameraIndex"] = currentSelectedCamera;
+        j["viewportCameraIndex"] = viewportCameraIndex; // Add this line
 
         // Write to file
         std::ofstream file(filename);
@@ -194,6 +264,10 @@ namespace graf
             if (j.contains("selectedCameraIndex")) {
                 currentSelectedCamera = j["selectedCameraIndex"];
                 currentSelectedCamera = glm::clamp(currentSelectedCamera, 0, (int)m_cameraList.size() - 1);
+            }
+            if (j.contains("viewportCameraIndex")) {
+                viewportCameraIndex = j["viewportCameraIndex"];
+                viewportCameraIndex = glm::clamp(viewportCameraIndex, 0, (int)m_cameraList.size() - 1);
             }
         }
     }

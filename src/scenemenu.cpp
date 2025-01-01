@@ -29,6 +29,11 @@ namespace graf
                 currentSelectedCamera = glm::clamp(currentSelectedCamera, 0, (int)m_cameraList.size() - 1);
                 m_activeCamera = m_cameraList[currentSelectedCamera];
             }
+            
+            // Add viewport camera selection
+            if (ImGui::SliderInt("Viewport Camera", &viewportCameraIndex, 0, (int)m_cameraList.size() - 1)) {
+                viewportCameraIndex = glm::clamp(viewportCameraIndex, 0, (int)m_cameraList.size() - 1);
+            }
 
             // Model Selection
             __section("Model Selection");
@@ -75,7 +80,7 @@ namespace graf
 
                 // Scale
                 glm::vec3 scale = currentModel->getTransform()->getScale();
-                if (ImGui::SliderFloat3("Scale", &scale.x, 0.1f, 5.0f)) {
+                if (ImGui::SliderFloat3("Scale", &scale.x, 0.1f, 20.0f)) {
                     currentModel->getTransform()->setScale(scale);
                 }
             }

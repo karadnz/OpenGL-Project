@@ -173,5 +173,6 @@
         }
     ],
     "selectedCameraIndex": 2,
-    "selectedModelIndex": 1
+    "selectedModelIndex": 1,
+    "viewportCameraIndex": 1
 }
