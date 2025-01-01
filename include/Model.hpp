@@ -1,8 +1,9 @@
 #ifndef Model_hpp
 #define Model_hpp
 #include <glm/glm.hpp>
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
+#include <glad/glad.h>  // Add this include for GLenum
 #include "shapecreator.hpp"
 namespace graf
 {
@@ -18,16 +19,14 @@ namespace graf
         static Model* loadModelFromFile(const string& name);
         static Model* createModel(const string& TextureName, const string& ShaderProgramName, const ShapeTypes& ShapeType);
         
-        
-        
         void draw(const glm::mat4& mtxTransform);
 
         // set
         void setShaderProgramName(const string& name);
         void setTextureName(const string& name);
         void setVertexArrayObject(VertexArrayObject* vao);
-
         void setShapeType(const ShapeTypes  &ShapeType);
+        void setFillType(GLenum fillType) { m_fillType = fillType; }
 
         // get
         string getTextureName();
@@ -35,7 +34,6 @@ namespace graf
         Transform* getTransform();
         VertexArrayObject* getVertexArrayObject();
         glm::vec2& getTextureRepeat();
-
         ShapeTypes getShapeType();
     private:
         glm::vec2   m_TextureRepeat;
@@ -44,7 +42,6 @@ namespace graf
         string      m_programName;
         Transform*  m_transform;
         VertexArrayObject* m_vao;
-
         ShapeTypes m_shapeType;
     };
 

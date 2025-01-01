@@ -52,6 +52,7 @@ int main(int arc, char** argv)
     camera->getTransform()->setPosition(glm::vec3(0.0f, 10.0f, -30.0f)); // Adjusted camera position
     glwindow.setKeyboardFunction([&](int key, int scancode, int action)
     {
+        camera = scene.getActiveCamera();
         if(key == GLFW_KEY_LEFT); // scene.removeModel(&model);
 
         if(key == GLFW_KEY_RIGHT);// scene.addModel(&model);//           transform.moveBackward();

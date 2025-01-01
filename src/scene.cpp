@@ -24,13 +24,15 @@ namespace graf
         m_activeCamera = new Camera();
         m_cameraList.push_back(m_activeCamera);  // Add default camera to list
         
-        // Create selection indicator cube
-        m_selectionCube = Model::createModel("indicator.jpg", "LightTextureShader", ShapeTypes::Cube);
-        m_selectionCube->getTransform()->setScale(glm::vec3(2.0f)); // Make it small
+        // Create selection indicator as pyramid instead of cube
+        m_selectionCube = Model::createModel("indicator.jpg", "LightTextureShader", ShapeTypes::Pyramid);
+        m_selectionCube->getTransform()->setScale(glm::vec3(1.5f));
 
-        // Create camera indicator cube (similar to selection cube but different texture/color)
-        m_cameraIndicator = Model::createModel("camera_indicator.jpg", "LightTextureShader", ShapeTypes::Cube);
-        m_cameraIndicator->getTransform()->setScale(glm::vec3(1.5f)); // Make it smaller than selection cube
+        // Change camera indicator to use Frustum shape and set wireframe mode
+        m_cameraIndicator = Model::createModel("camera_indicator.jpg", "LightTextureShader", ShapeTypes::Frustum);
+        m_cameraIndicator->getTransform()->setScale(glm::vec3(2.0f));
+        m_cameraIndicator->getTransform()->setEuler(glm::vec3(90.0f, 0.0f, 0.0f)); // Rotate base 90 degrees so top points forward
+        m_cameraIndicator->setFillType(GL_LINE); // Set wireframe mode
     }
     Scene::~Scene() {
         delete m_selectionCube;
@@ -65,13 +67,23 @@ namespace graf
         // Set viewport to main window size
         glViewport(0, 0, 1400, 1400);
         
-        // Draw camera indicators first (so they're behind everything)
+        // Draw camera indicators first (with wireframe)
         for(auto cam : m_cameraList) {
             if(cam != m_activeCamera) { // Don't show indicator for active camera
                 // Update position AND rotation of the camera indicator
                 m_cameraIndicator->getTransform()->setPosition(cam->getTransform()->getPosition());
-                m_cameraIndicator->getTransform()->setEuler(cam->getTransform()->getEuler());
+                glm::vec3 camRot = cam->getTransform()->getEuler();
+                m_cameraIndicator->getTransform()->setEuler(camRot + glm::vec3(90.0f, 0.0f, 0.0f));
+                
+                // Store current polygon mode
+                GLint polygonMode[2];
+                glGetIntegerv(GL_POLYGON_MODE, polygonMode);
+                
+                // Draw camera indicator
                 m_cameraIndicator->draw(m_activeCamera->getProjMatrix() * m_activeCamera->getViewMatrix());
+                
+                // Restore previous polygon mode
+                glPolygonMode(GL_FRONT_AND_BACK, polygonMode[0]);
             }
         }
 
@@ -80,21 +92,21 @@ namespace graf
         {
             next->draw(m_activeCamera->getProjMatrix()*m_activeCamera->getViewMatrix());
             
-            // If this is selected model, draw selection cube above it
+            // If this is selected model, draw selection pyramid above it
             if (next == m_modelList[currentSelectedModel]) {
-                // Get position of current model and offset it upwards
+                // Get position of current model and position pyramid above it
                 glm::vec3 pos = next->getTransform()->getPosition();
-                pos.y += next->getTransform()->getScale().y + 0.5f; // Position above model
+                pos.y += (next->getTransform()->getScale().y + 0.5f); // Changed from -= to +=
                 
-                // Update selection cube position
+                // Update selection pyramid position
                 m_selectionCube->getTransform()->setPosition(pos);
                 
-                // Slowly rotate the selection cube
+                // Rotate the pyramid around Y axis and point down
                 static float rotation = 0.0f;
-                rotation += 0.3f;
-                m_selectionCube->getTransform()->setEuler(glm::vec3(0.0f, rotation, 0.0f));
+                rotation += 0.5f;
+                m_selectionCube->getTransform()->setEuler(glm::vec3(180.0f, rotation, 0.0f)); // Added 180 degrees X rotation
                 
-                // Draw selection cube
+                // Draw selection pyramid
                 m_selectionCube->draw(m_activeCamera->getProjMatrix()*m_activeCamera->getViewMatrix());
             }
         }
@@ -114,7 +126,8 @@ namespace graf
                 if(cam != viewportCam) { // Don't show indicator for viewport camera
                     // Update position AND rotation of the camera indicator
                     m_cameraIndicator->getTransform()->setPosition(cam->getTransform()->getPosition());
-                    m_cameraIndicator->getTransform()->setEuler(cam->getTransform()->getEuler());
+                    glm::vec3 camRot = cam->getTransform()->getEuler();
+                    m_cameraIndicator->getTransform()->setEuler(camRot + glm::vec3(90.0f, 0.0f, 0.0f));
                     m_cameraIndicator->draw(viewportCam->getProjMatrix() * viewportCam->getViewMatrix());
                 }
             }
