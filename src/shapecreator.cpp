@@ -52,10 +52,10 @@ namespace graf
 
 
         float vertices[] = {
-        -0.5f, 0.5f, 0.0f, 0.0f,1.0f,   //0
-         0.5f, 0.5f, 0.0f, 1.0f,1.0f,   //1
-         0.5f,-0.5f, 0.0f, 1.0f,0.0f,   //2
-        -0.5f,-0.5f, 0.0f, 0.0f,0.0f   //3
+        -0.5f, 0.5f, 0.0f, 0.0f,0.0f,0.0f, 0.0f,1.0f,   //0
+         0.5f, 0.5f, 0.0f, 0.0f,0.0f,0.0f, 1.0f,1.0f,   //1
+         0.5f,-0.5f, 0.0f, 0.0f,0.0f,0.0f, 1.0f,0.0f,   //2
+        -0.5f,-0.5f, 0.0f, 0.0f,0.0f,0.0f, 0.0f,0.0f   //3
         }; 
         unsigned int indices[]={0,1,2,0,2,3};
 
@@ -69,8 +69,12 @@ namespace graf
         va->create();
         va->setVertexBuffer(vb);
         va->setIndexBuffer(ib);
+
+        // For square, we only need position and texture coords
         va->addVertexAttribute(graf::VertexAttributeType::Position);
+        va->addVertexAttribute(graf::VertexAttributeType::Normal);   // Add dummy normal
         va->addVertexAttribute(graf::VertexAttributeType::Texture);
+        
         va->activateAttributes();
 
         m_vaoMap[ShapeTypes::Square] = va;
@@ -123,6 +127,7 @@ namespace graf
         va->setVertexBuffer(vb);
         va->setIndexBuffer(ib);
         va->addVertexAttribute(graf::VertexAttributeType::Position);
+        va->addVertexAttribute(graf::VertexAttributeType::Normal);
         va->addVertexAttribute(graf::VertexAttributeType::Texture);
         va->activateAttributes();
 
@@ -280,9 +285,15 @@ namespace graf
         va->setVertexBuffer(vb);
         va->setIndexBuffer(ib);
 
+        // First add position attribute - required by both shaders
         va->addVertexAttribute(VertexAttributeType::Position);
+        
+        // For compatibility with both shaders, add a dummy normal attribute if using TextureShader
         va->addVertexAttribute(VertexAttributeType::Normal);
+        
+        // Add texture coordinates - required by both shaders
         va->addVertexAttribute(VertexAttributeType::Texture);
+        
         va->activateAttributes();
         m_vaoMap[ShapeTypes::Cube] =va;
         va->unbind();
@@ -290,7 +301,6 @@ namespace graf
     }
 
 
-    // Implement the createPyramid function
     VertexArrayObject *ShapeCreator::createPyramid()
     {
         if (m_vaoMap.count(ShapeTypes::Pyramid) > 0)
@@ -380,6 +390,7 @@ namespace graf
         va->setIndexBuffer(ib);
 
         va->addVertexAttribute(VertexAttributeType::Position);
+        va->addVertexAttribute(graf::VertexAttributeType::Normal);
         va->addVertexAttribute(VertexAttributeType::Texture);
         va->activateAttributes();
         m_vaoMap[ShapeTypes::Pyramid] = va;
@@ -503,6 +514,7 @@ namespace graf
         va->setIndexBuffer(ib);
 
         va->addVertexAttribute(VertexAttributeType::Position);
+        va->addVertexAttribute(graf::VertexAttributeType::Normal);
         va->addVertexAttribute(VertexAttributeType::Texture);
         va->activateAttributes();
         m_vaoMap[ShapeTypes::Frustum] = va;
