@@ -6,6 +6,7 @@ layout (location = 2) in vec2 inTexCoord;
 uniform mat4 uWorldTransform;
 uniform mat4 uInverseRotation;
 uniform vec3 uLightDirection;
+uniform vec2 uTextureRepeat;
 
 out vec2 TexCoord;
 out float Factor;
@@ -16,8 +17,8 @@ void main()
     vec3 worldNormal = normalize(mat3(uInverseRotation) * inNormal);
     
     // Calculate lighting factor
-    Factor = max(dot(normalize(-uLightDirection), worldNormal), 1.0f); // Added ambient light
+    Factor = max(dot(normalize(-uLightDirection), worldNormal), 1.0f);
     
     gl_Position = uWorldTransform * vec4(inPosition, 1.0);
-    TexCoord = inTexCoord;
+    TexCoord = inTexCoord * uTextureRepeat; // Multiply by repeat factor
 }

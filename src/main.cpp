@@ -34,10 +34,10 @@ int main(int arc, char** argv)
         "LightTextureSquare.json"
     };
 
-        //graf::Model* model = graf::Model::loadModelFromFile(modelFiles[3]);
-        //model->getTransform()->setPosition(glm::vec3(-4.0f, 1.0f, 1.0f));
+        graf::Model* model = graf::Model::loadModelFromFile(modelFiles[3]);
+        model->getTransform()->setPosition(glm::vec3(-4.0f, 1.0f, 1.0f));
         //model->getTransform()->setScale(scales[i]);
-        //scene.addModel(model);
+        scene.addModel(model);
 
     // Define positions for walls and ground
     std::vector<glm::vec3> positions = {
@@ -53,13 +53,19 @@ int main(int arc, char** argv)
         glm::vec3(10.0f, 0.1f, 10.0f)   // Ground
     };
 
+
+
     // Create and configure models
-    for (size_t i = 0; i < modelFiles.size(); ++i)
+    for (size_t i = 0; i < modelFiles.size() - 1; ++i)
     {
         graf::Model* model = graf::Model::loadModelFromFile(modelFiles[i]);
         model->getTransform()->setPosition(positions[i]);
         //model->getTransform()->setScale(scales[i]);
+
+        //model->getTextureRepeat() = glm::vec2(2.0f, 2.0f); // Will repeat texture 2 times in both directions
         scene.addModel(model);
+
+        //cout << "repeat " << model->getTextureRepeat() << endl;
     }
 
     double oldMouseX = -1.0f;

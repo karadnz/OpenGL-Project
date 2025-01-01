@@ -14,6 +14,10 @@
         {
             "Name":"uLightDirection",
             "Type":"vec3"
+        },
+        {
+            "Name":"uTextureRepeat",
+            "Type":"vec2"
         }
     ]
 }
