@@ -30,8 +30,14 @@ int main(int arc, char** argv)
     std::vector<std::string> modelFiles = {
         "LightTextureCube.json", // Left wall
         "LightTextureCube.json", // Right wall
-        "LightTextureCube.json"  // Ground
+        "LightTextureCube.json",  // Ground
+        "LightTextureSquare.json"
     };
+
+        //graf::Model* model = graf::Model::loadModelFromFile(modelFiles[3]);
+        //model->getTransform()->setPosition(glm::vec3(-4.0f, 1.0f, 1.0f));
+        //model->getTransform()->setScale(scales[i]);
+        //scene.addModel(model);
 
     // Define positions for walls and ground
     std::vector<glm::vec3> positions = {
@@ -52,7 +58,7 @@ int main(int arc, char** argv)
     {
         graf::Model* model = graf::Model::loadModelFromFile(modelFiles[i]);
         model->getTransform()->setPosition(positions[i]);
-        model->getTransform()->setScale(scales[i]);
+        //model->getTransform()->setScale(scales[i]);
         scene.addModel(model);
     }
 

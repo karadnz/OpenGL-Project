@@ -1,6 +1,6 @@
 {
     "ModelName":"TextureCube",
-    "TextureName":"container.jpg",
+    "TextureName":"container3.jpg",
     "ShaderProgramName":"LightTextureShader",
     "ShapeType":2,
     "Scale":[
