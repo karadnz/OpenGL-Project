@@ -1,0 +1,177 @@
+{
+    "activeCameraIndex": 2,
+    "cameras": [
+        {
+            "aspect": 1.0,
+            "far": 100.0,
+            "fov": 90.0,
+            "near": 1.0,
+            "position": [
+                -2.0,
+                2.0,
+                -10.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ]
+        },
+        {
+            "aspect": 1.0,
+            "far": 100.0,
+            "fov": 90.0,
+            "near": 0.10000000149011612,
+            "position": [
+                -7.0970001220703125,
+                5.807000160217285,
+                -11.111000061035156
+            ],
+            "rotation": [
+                29.031999588012695,
+                40.64500045776367,
+                0.0
+            ]
+        },
+        {
+            "aspect": 1.0,
+            "far": 100.0,
+            "fov": 90.0,
+            "near": 0.10000000149011612,
+            "position": [
+                0.0,
+                7.742000102996826,
+                -8.253999710083008
+            ],
+            "rotation": [
+                52.257999420166016,
+                0.0,
+                0.0
+            ]
+        }
+    ],
+    "models": [
+        {
+            "position": [
+                -0.0,
+                1.0,
+                1.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "shaderName": "LightTextureShader",
+            "shapeType": 2,
+            "textureName": "container3.jpg",
+            "textureRepeat": [
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "position": [
+                -2.0,
+                0.03200000151991844,
+                1.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "shaderName": "TextureShader",
+            "shapeType": 2,
+            "textureName": "container3.jpg",
+            "textureRepeat": [
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "position": [
+                -5.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                0.10000000149011612,
+                5.0,
+                10.0
+            ],
+            "shaderName": "LightTextureShader",
+            "shapeType": 2,
+            "textureName": "container3.jpg",
+            "textureRepeat": [
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "position": [
+                5.0,
+                0.0,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                0.10000000149011612,
+                5.0,
+                10.0
+            ],
+            "shaderName": "LightTextureShader",
+            "shapeType": 2,
+            "textureName": "container3.jpg",
+            "textureRepeat": [
+                1.0,
+                1.0
+            ]
+        },
+        {
+            "position": [
+                0.0,
+                -2.5,
+                0.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                10.0,
+                0.10000000149011612,
+                10.0
+            ],
+            "shaderName": "LightTextureShader",
+            "shapeType": 2,
+            "textureName": "container3.jpg",
+            "textureRepeat": [
+                1.0,
+                1.0
+            ]
+        }
+    ],
+    "selectedCameraIndex": 2,
+    "selectedModelIndex": 1
+}

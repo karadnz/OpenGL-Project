@@ -46,6 +46,19 @@ namespace graf
         return model;
      
     }
+
+    Model* Model::createModel(const string& TextureName, const string& ShaderProgramName, const ShapeTypes& ShapeType)
+    {
+        Model* model = new Model;
+
+        model->setTextureName(TextureName);
+        model->setShaderProgramName(ShaderProgramName);
+        model->setVertexArrayObject(ShapeCreator::createShape(ShapeType));
+
+        model->setShapeType(ShapeType);
+        return model;
+     
+    }
     void Model::setShaderProgramName(const string& programFileName)
     {
         m_programName = programFileName;

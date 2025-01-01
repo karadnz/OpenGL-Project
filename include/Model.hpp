@@ -16,6 +16,7 @@ namespace graf
     public:
         Model();
         static Model* loadModelFromFile(const string& name);
+        static Model* createModel(const string& TextureName, const string& ShaderProgramName, const ShapeTypes& ShapeType);
         
         
         
