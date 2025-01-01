@@ -18,6 +18,7 @@ using namespace std;
 
 void printMatrix(const glm::mat4& mtx);
 void testModels(std::vector<std::string> &modelFiles,  graf::Scene &scene);
+void createDefaultScene(std::vector<std::string> &modelFiles,  graf::Scene &scene);
 
 
 
@@ -36,29 +37,9 @@ int main(int arc, char** argv)
     };
 
     testModels(modelFiles, scene);
+    createDefaultScene(modelFiles, scene);
 
-    // Define positions for walls and ground
-    std::vector<glm::vec3> positions = {
-        glm::vec3(-5.0f, 0.0f, 0.0f),   // Left wall
-        glm::vec3(5.0f, 0.0f, 0.0f),    // Right wall
-        glm::vec3(0.0f, -2.5f, 0.0f)    // Ground
-    };
-
-    // Define scales for walls and ground
-    std::vector<glm::vec3> scales = {
-        glm::vec3(0.1f, 5.0f, 10.0f),   // Left wall
-        glm::vec3(0.1f, 5.0f, 10.0f),   // Right wall
-        glm::vec3(10.0f, 0.1f, 10.0f)   // Ground
-    };
-
-    // Create and configure models
-    for (size_t i = 0; i < 3; ++i)
-    {
-        graf::Model* model = graf::Model::loadModelFromFile(modelFiles[0]);
-        model->getTransform()->setPosition(positions[i]);
-        model->getTransform()->setScale(scales[i]);
-        scene.addModel(model);
-    }
+    
 
     double oldMouseX = -1.0f;
     double oldMouseY = -1.0f;
@@ -66,8 +47,8 @@ int main(int arc, char** argv)
     double dy = 0.0f;
 
     graf::Camera* camera = scene.getActiveCamera();
-    camera->getTransform()->setPosition(glm::vec3(0.0f, 2.0f, -10.0f)); // Position camera to view the scene
-
+    //camera->getTransform()->setPosition(glm::vec3(0.0f, 2.0f, -10.0f)); // Position camera to view the scene
+    camera->getTransform()->setPosition(glm::vec3(0.0f, 10.0f, -30.0f)); // Adjusted camera position
     glwindow.setKeyboardFunction([&](int key, int scancode, int action)
     {
         if(key == GLFW_KEY_LEFT); // scene.removeModel(&model);
@@ -129,13 +110,56 @@ int main(int arc, char** argv)
 }
 
 
+void createDefaultScene(std::vector<std::string> &modelFiles,  graf::Scene &scene)
+{
+    // Define positions for walls and ground
+    std::vector<glm::vec3> positions = {
+        glm::vec3(-50.0f, 0.0f, 0.0f),    // Left wall
+        glm::vec3(0.0f, 0.0f, 50.0f),     // Back wall
+        glm::vec3(50.0f, 0.0f, 0.0f),     // Right wall
+        glm::vec3(0.0f, 0.0f, -50.0f),    // Front wall
+        glm::vec3(0.0f, -2.5f, 0.0f)      // Ground
+    };
+
+    // Define scales for walls and ground
+    std::vector<glm::vec3> scales = {
+        glm::vec3(0.5f, 50.0f, 100.0f),   // Left wall
+        glm::vec3(100.0f, 50.0f, 0.5f),   // Back wall
+        glm::vec3(0.5f, 50.0f, 100.0f),   // Right wall
+        glm::vec3(100.0f, 50.0f, 0.5f),   // Front wall
+        glm::vec3(100.0f, 0.5f, 100.0f)   // Ground
+    };
+
+    // Create models
+    std::vector<std::string> textures =
+    {
+        "Wall.jpg",        
+        "Wall.jpg",
+        "Wall.jpg", 
+        "Wall.jpg",
+        "Ground.jpg"          
+    };
+
+    // Create and configure models
+    for (size_t i = 0; i < 5; ++i)  // Changed from 3 to 5 to include all walls
+    {
+        graf::Model* model = graf::Model::createModel(textures[i], "LightTextureShader", graf::ShapeTypes::Cube);
+        model->getTransform()->setPosition(positions[i]);
+        model->getTransform()->setScale(scales[i]);
+        model->getTextureRepeat() = glm::vec2(10.0f, 10.0f);
+        scene.addModel(model);
+    }
+
+}
+
 void testModels(std::vector<std::string> &modelFiles,  graf::Scene &scene)
 {
     for (size_t i = 0; i < modelFiles.size(); ++i)
     {
         graf::Model* model = graf::Model::loadModelFromFile(modelFiles[i]);
-        model->getTransform()->setPosition(glm::vec3(-2.0f * i, 1.0f, 1.0f));
+        model->getTransform()->setPosition(glm::vec3(-6.0f * i, 5.0f, 1.0f));
         scene.addModel(model);
+        model->getTransform()->setScale(glm::vec3(5.0f, 5.0f, 5.0f));
         //"LightTextureSquare.json",      
         //"TextureCube.json", 
     }

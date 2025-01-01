@@ -26,11 +26,11 @@ namespace graf
         
         // Create selection indicator cube
         m_selectionCube = Model::createModel("indicator.jpg", "LightTextureShader", ShapeTypes::Cube);
-        m_selectionCube->getTransform()->setScale(glm::vec3(0.3f)); // Make it small
+        m_selectionCube->getTransform()->setScale(glm::vec3(2.0f)); // Make it small
 
         // Create camera indicator cube (similar to selection cube but different texture/color)
         m_cameraIndicator = Model::createModel("camera_indicator.jpg", "LightTextureShader", ShapeTypes::Cube);
-        m_cameraIndicator->getTransform()->setScale(glm::vec3(0.2f)); // Make it smaller than selection cube
+        m_cameraIndicator->getTransform()->setScale(glm::vec3(1.5f)); // Make it smaller than selection cube
     }
     Scene::~Scene() {
         delete m_selectionCube;
@@ -68,8 +68,10 @@ namespace graf
         // Draw camera indicators first (so they're behind everything)
         for(auto cam : m_cameraList) {
             if(cam != m_activeCamera) { // Don't show indicator for active camera
+                // Update position AND rotation of the camera indicator
                 m_cameraIndicator->getTransform()->setPosition(cam->getTransform()->getPosition());
-                m_cameraIndicator->draw(m_activeCamera->getProjMatrix() * m_activeCamera->getViewMatrix()); // Fixed this line
+                m_cameraIndicator->getTransform()->setEuler(cam->getTransform()->getEuler());
+                m_cameraIndicator->draw(m_activeCamera->getProjMatrix() * m_activeCamera->getViewMatrix());
             }
         }
 
@@ -110,7 +112,9 @@ namespace graf
             // Draw camera indicators in viewport
             for(auto cam : m_cameraList) {
                 if(cam != viewportCam) { // Don't show indicator for viewport camera
+                    // Update position AND rotation of the camera indicator
                     m_cameraIndicator->getTransform()->setPosition(cam->getTransform()->getPosition());
+                    m_cameraIndicator->getTransform()->setEuler(cam->getTransform()->getEuler());
                     m_cameraIndicator->draw(viewportCam->getProjMatrix() * viewportCam->getViewMatrix());
                 }
             }

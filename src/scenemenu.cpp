@@ -54,14 +54,14 @@ namespace graf
 
                 // Texture Controls
                 __section("Textures");
-                const char* textureNames[] = { "container.jpg", "container2.jpg", "container3.jpg" };
+                const char* textureNames[] = { "container.jpg", "container2.jpg", "container3.jpg", "wall.jpg" };
                 static int currentTexture = 0;
                 if (ImGui::Combo("Texture", &currentTexture, textureNames, IM_ARRAYSIZE(textureNames))) {
                     currentModel->setTextureName(textureNames[currentTexture]);
                 }
 
                 // Texture Repeat
-                ImGui::SliderFloat2("Texture Repeat", &currentModel->getTextureRepeat().x, 0.0f, 10.0f);
+                ImGui::SliderFloat2("Texture Repeat", &currentModel->getTextureRepeat().x, 0.0f, 20.0f);
 
                 // Transform Controls
                 __section("Model Transform");
@@ -80,7 +80,7 @@ namespace graf
 
                 // Scale
                 glm::vec3 scale = currentModel->getTransform()->getScale();
-                if (ImGui::SliderFloat3("Scale", &scale.x, 0.1f, 20.0f)) {
+                if (ImGui::SliderFloat3("Scale", &scale.x, 0.1f, 100.0f)) {
                     currentModel->getTransform()->setScale(scale);
                 }
             }
@@ -90,7 +90,7 @@ namespace graf
             
             // Camera Position
             glm::vec3 camPos = m_activeCamera->getTransform()->getPosition();
-            if (ImGui::SliderFloat3("Camera Position", &camPos.x, -20.0f, 20.0f)) {
+            if (ImGui::SliderFloat3("Camera Position", &camPos.x, -70.0f, 70.0f)) {
                 m_activeCamera->getTransform()->setPosition(camPos);
             }
 

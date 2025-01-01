@@ -4,6 +4,6 @@
     "ShaderProgramName":"LightTextureShader",
     "ShapeType":1,
     "Scale":[
-        1.0,1.0,1.0
+        10.0,10.0,10.0
     ]
 }

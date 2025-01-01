@@ -1,2 +1,2 @@
-cd build ; cmake .. ; make ; cd .. ; ./build/OpenGLProject
+mkdir -p build ; cd build ; cmake .. ; make ; cd .. ; ./build/OpenGLProject
 

@@ -1,5 +1,5 @@
 {
-    "activeCameraIndex": 2,
+    "activeCameraIndex": 0,
     "cameras": [
         {
             "aspect": 1.0,
@@ -7,9 +7,9 @@
             "fov": 90.0,
             "near": 1.0,
             "position": [
-                -2.0,
-                2.0,
-                -10.0
+                -2.257999897003174,
+                7.742000102996826,
+                -14.444000244140625
             ],
             "rotation": [
                 0.0,
@@ -23,13 +23,13 @@
             "fov": 90.0,
             "near": 0.10000000149011612,
             "position": [
-                -7.0970001220703125,
-                5.807000160217285,
+                -31.613000869750977,
+                6.77400016784668,
                 -11.111000061035156
             ],
             "rotation": [
-                29.031999588012695,
-                40.64500045776367,
+                0.0,
+                69.677001953125,
                 0.0
             ]
         },
@@ -39,13 +39,13 @@
             "fov": 90.0,
             "near": 0.10000000149011612,
             "position": [
-                0.0,
-                7.742000102996826,
-                -8.253999710083008
+                -22.579999923706055,
+                33.87099838256836,
+                -20.0
             ],
             "rotation": [
                 52.257999420166016,
-                0.0,
+                46.45100021362305,
                 0.0
             ]
         }
@@ -54,7 +54,7 @@
         {
             "position": [
                 -0.0,
-                1.0,
+                5.0,
                 1.0
             ],
             "rotation": [
@@ -63,9 +63,9 @@
                 0.0
             ],
             "scale": [
-                1.0,
-                1.0,
-                1.0
+                5.0,
+                5.0,
+                5.0
             ],
             "shaderName": "LightTextureShader",
             "shapeType": 2,
@@ -77,8 +77,8 @@
         },
         {
             "position": [
-                -2.0,
-                0.03200000151991844,
+                -6.0,
+                5.0,
                 1.0
             ],
             "rotation": [
@@ -87,12 +87,12 @@
                 0.0
             ],
             "scale": [
-                1.0,
-                1.0,
-                1.0
+                5.0,
+                5.0,
+                5.0
             ],
             "shaderName": "TextureShader",
-            "shapeType": 2,
+            "shapeType": 1,
             "textureName": "container3.jpg",
             "textureRepeat": [
                 1.0,
@@ -101,7 +101,7 @@
         },
         {
             "position": [
-                -5.0,
+                -50.0,
                 0.0,
                 0.0
             ],
@@ -111,21 +111,45 @@
                 0.0
             ],
             "scale": [
-                0.10000000149011612,
-                5.0,
-                10.0
+                0.5,
+                50.0,
+                100.0
             ],
             "shaderName": "LightTextureShader",
             "shapeType": 2,
-            "textureName": "container3.jpg",
+            "textureName": "Wall.jpg",
             "textureRepeat": [
-                1.0,
-                1.0
+                10.0,
+                10.0
             ]
         },
         {
             "position": [
-                5.0,
+                0.0,
+                0.0,
+                50.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                100.0,
+                50.0,
+                0.5
+            ],
+            "shaderName": "LightTextureShader",
+            "shapeType": 2,
+            "textureName": "Wall.jpg",
+            "textureRepeat": [
+                10.0,
+                10.0
+            ]
+        },
+        {
+            "position": [
+                50.0,
                 0.0,
                 0.0
             ],
@@ -135,16 +159,40 @@
                 0.0
             ],
             "scale": [
-                0.10000000149011612,
-                5.0,
-                10.0
+                0.5,
+                50.0,
+                100.0
             ],
             "shaderName": "LightTextureShader",
             "shapeType": 2,
-            "textureName": "container3.jpg",
+            "textureName": "Wall.jpg",
             "textureRepeat": [
-                1.0,
-                1.0
+                10.0,
+                10.0
+            ]
+        },
+        {
+            "position": [
+                0.0,
+                0.0,
+                -50.0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": [
+                100.0,
+                50.0,
+                0.5
+            ],
+            "shaderName": "LightTextureShader",
+            "shapeType": 2,
+            "textureName": "Wall.jpg",
+            "textureRepeat": [
+                10.0,
+                10.0
             ]
         },
         {
@@ -159,20 +207,20 @@
                 0.0
             ],
             "scale": [
-                10.0,
-                0.10000000149011612,
-                10.0
+                100.0,
+                0.5,
+                100.0
             ],
             "shaderName": "LightTextureShader",
             "shapeType": 2,
-            "textureName": "container3.jpg",
+            "textureName": "Ground.jpg",
             "textureRepeat": [
-                1.0,
-                1.0
+                10.0,
+                10.0
             ]
         }
     ],
-    "selectedCameraIndex": 2,
-    "selectedModelIndex": 1,
-    "viewportCameraIndex": 1
+    "selectedCameraIndex": 0,
+    "selectedModelIndex": 0,
+    "viewportCameraIndex": 2
 }

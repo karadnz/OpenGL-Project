@@ -5,17 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(lldb) Launch",
-            "type": "cppdbg",
+            "name": "Build Only",
+            "type": "node",
             "request": "launch",
-            "program": "${workspaceFolder}/build/OpenGLProject",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb",
-            "preLaunchTask": "BuildMac"
+            "program": "${workspaceFolder}/.vscode/empty.js",
+            "preLaunchTask": "BuildMac",
+            "presentation": {
+                "reveal": "never"
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
         }
     ]
 }

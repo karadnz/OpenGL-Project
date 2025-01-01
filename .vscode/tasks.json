@@ -22,17 +22,14 @@
         {
             "label": "BuildMac",
             "type": "shell",
-            "command": "make",
+            "command": "${workspaceFolder}/run.sh",
             "options": {
-                "cwd": "${workspaceFolder}/build"
+                "cwd": "${workspaceFolder}"
             },
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "dependsOn":[
-                "CMakeMac"
-            ]
+            }
         },
         {
             "label": "CMakeDebugBuild",
