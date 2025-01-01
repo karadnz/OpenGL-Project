@@ -11,6 +11,9 @@ namespace graf
         m_MtxWorld = glm::mat4(1.0f);
         m_MtxRotation = glm::mat4(1.0f);
         m_MtxTranslate = glm::mat4(1.0f);
+
+        //my stuff
+        m_Scale = glm::vec3(1.0f);
     }
     glm::vec3 Transform::getPosition()
     {
@@ -53,9 +56,9 @@ namespace graf
     }    
     void Transform::update()
     {
-        m_MtxTranslate = glm::translate(glm::mat4(1),m_Position);
-       
-        m_MtxWorld = m_MtxTranslate*m_MtxRotation;
+        m_MtxTranslate = glm::translate(glm::mat4(1), m_Position);
+        glm::mat4 mtxScale = glm::scale(glm::mat4(1), m_Scale);
+        m_MtxWorld = m_MtxTranslate * m_MtxRotation * mtxScale;
     }
     glm::vec3& Transform::getEuler()
     {
@@ -165,6 +168,11 @@ namespace graf
     {
         m_Position = position;
         m_MtxTranslate = glm::translate(glm::mat4(1.0f),m_Position);
+        update();
+    }
+    void Transform::setScale(const glm::vec3& scale)
+    {
+        m_Scale = scale;
         update();
     }
 }

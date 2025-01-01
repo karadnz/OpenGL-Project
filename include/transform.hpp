@@ -28,12 +28,18 @@ namespace graf
         void update();
         void setEuler(const glm::vec3& euler);
         glm::mat4 getRotationMatrix();
+
+        // my stuff
+        void setScale(const glm::vec3& scale);
     private:
         glm::mat4 m_MtxRotation;
         glm::mat4 m_MtxWorld;
         glm::mat4 m_MtxTranslate;
         glm::vec3 m_Euler;
         glm::vec3 m_Position;
+
+        // my stuff
+        glm::vec3 m_Scale;
     };
 }
 
