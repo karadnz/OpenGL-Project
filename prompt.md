@@ -51,3 +51,18 @@
 Fixed the lighting calculation in the vertex shader
 Added proper ambient lighting factor
 Added the light direction uniform to settings.json
+
+
+
+
+
+
+
+
+when i use TextureShader
+
+cube textures are not displayed correctly, they displayed as a color similar to the texture. But squares works correctly.
+
+when i use LightTextureShader
+
+cube textures are correct. but square textures does not appear, they displayed as color similar to the texture.

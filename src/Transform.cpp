@@ -175,4 +175,9 @@ namespace graf
         m_Scale = scale;
         update();
     }
+
+    glm::vec3 Transform::getScale(void)
+    {
+        return m_Scale;
+    }
 }

@@ -41,6 +41,8 @@ namespace graf
         model->setTextureName(TextureName);
         model->setShaderProgramName(ShaderProgramName);
         model->setVertexArrayObject(ShapeCreator::createShape(ShapeType));
+
+        model->setShapeType(ShapeType);
         return model;
      
     }
@@ -55,10 +57,22 @@ namespace graf
     void Model::setTextureName(const string& FileName)
     {
         m_textureName = FileName;
+        // Add texture to TextureManager when texture name changes
+        TextureManager::addTextureFromFile(FileName); 
     }
     string Model::getTextureName()
     {
         return m_textureName;
+    }
+
+    void Model::setShapeType(const ShapeTypes  &ShapeType)
+    {
+        m_shapeType = ShapeType;
+        this->setVertexArrayObject(ShapeCreator::createShape(ShapeType));
+    }
+    ShapeTypes Model::getShapeType()
+    {
+        return m_shapeType;
     }
 
     Transform* Model::getTransform()

@@ -24,7 +24,7 @@ void testModels(std::vector<std::string> &modelFiles,  graf::Scene &scene);
 int main(int arc, char** argv)
 {
     graf::GLWindow glwindow;
-    glwindow.create(800, 800);
+    glwindow.create(1400, 1400);
 
     graf::Scene scene;
 
@@ -96,18 +96,18 @@ int main(int arc, char** argv)
     });
     glwindow.setMouseFunction([&](double xpos,double ypos){
 
-        if(oldMouseX==-1)
-        {
-            oldMouseX = xpos;
-            oldMouseY = ypos;
-        }
-        camera->turn(dx*.1f);
-        camera->look(dy*.1f);
-        dx = xpos-oldMouseX;
-        dy = ypos-oldMouseY;
+        // if(oldMouseX==-1)
+        // {
+        //     oldMouseX = xpos;
+        //     oldMouseY = ypos;
+        // }
+        // camera->turn(dx*.1f);
+        // camera->look(dy*.1f);
+        // dx = xpos-oldMouseX;
+        // dy = ypos-oldMouseY;
 
-        oldMouseX= xpos;
-        oldMouseY=ypos;
+        // oldMouseX= xpos;
+        // oldMouseY=ypos;
 
         //cout << "x: " << oldMouseX << "| y: " << oldMouseY << "\n";
         //camera->getProjMatrix

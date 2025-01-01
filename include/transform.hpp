@@ -31,6 +31,7 @@ namespace graf
 
         // my stuff
         void setScale(const glm::vec3& scale);
+        glm::vec3 getScale(void);
     private:
         glm::mat4 m_MtxRotation;
         glm::mat4 m_MtxWorld;
