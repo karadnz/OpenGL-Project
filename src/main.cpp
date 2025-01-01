@@ -33,7 +33,8 @@ int main(int arc, char** argv)
     std::vector<std::string> modelFiles =
     {
         "LightTextureCube.json",        
-        "TextureSquare.json"            
+        "TextureSquare.json",     
+        "TextureCube.json",          
     };
 
     testModels(modelFiles, scene);
