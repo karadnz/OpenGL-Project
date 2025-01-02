@@ -68,7 +68,7 @@ namespace graf
                 
                 // Position
                 glm::vec3 position = currentModel->getTransform()->getPosition();
-                if (ImGui::SliderFloat3("Position", &position.x, -10.0f, 10.0f)) {
+                if (ImGui::SliderFloat3("Position", &position.x, -50.0f, 50.0f)) {
                     currentModel->getTransform()->setPosition(position);
                 }
 

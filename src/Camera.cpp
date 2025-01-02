@@ -12,7 +12,7 @@ namespace graf
     {
         m_Transform=  new Transform;
 
-        m_mtxProj= glm::perspectiveLH(fov,aspect,near,far);
+        m_mtxProj= glm::perspectiveLH(glm::radians(fov), aspect, near, far); // Convert fov to radians
         m_fov = fov;
         m_aspect = aspect;
         m_near = near;
@@ -48,22 +48,21 @@ namespace graf
 
     void Camera::setFov(float fov) {
         m_fov = fov;
-        // Convert degrees to radians and update projection matrix
-        m_mtxProj = glm::perspectiveLH(glm::radians(m_fov), m_aspect, m_near, m_far);
+        m_mtxProj = glm::perspectiveLH(glm::radians(m_fov), m_aspect, m_near, m_far); // Convert fov to radians
     }
 
     void Camera::setAspect(float aspect) {
         m_aspect = aspect;
-        m_mtxProj = glm::perspectiveLH(m_fov, m_aspect, m_near, m_far);
+        m_mtxProj = glm::perspectiveLH(glm::radians(m_fov), m_aspect, m_near, m_far);
     }
 
     void Camera::setNear(float near_plane) {
         m_near = near_plane;
-        m_mtxProj = glm::perspectiveLH(m_fov, m_aspect, m_near, m_far);
+        m_mtxProj = glm::perspectiveLH(glm::radians(m_fov), m_aspect, m_near, m_far);
     }
 
     void Camera::setFar(float far_plane) {
         m_far = far_plane;
-        m_mtxProj = glm::perspectiveLH(m_fov, m_aspect, m_near, m_far);
+        m_mtxProj = glm::perspectiveLH(glm::radians(m_fov), m_aspect, m_near, m_far);
     }
 }
